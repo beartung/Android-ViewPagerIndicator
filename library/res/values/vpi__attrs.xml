@@ -75,6 +75,7 @@
     </declare-styleable>
 
     <declare-styleable name="TitlePageIndicator">
+        <attr name="titleBackground" format="reference" />
         <!-- Screen edge padding. -->
         <attr name="clipPadding" format="dimension" />
         <!-- Color of the footer line and indicator. -->
@@ -86,6 +87,7 @@
             <enum name="none" value="0" />
             <enum name="triangle" value="1" />
             <enum name="underline" value="2" />
+            <enum name="background" value="3" />
         </attr>
         <!-- Height of the indicator above the footer line. -->
         <attr name="footerIndicatorHeight" format="dimension" />

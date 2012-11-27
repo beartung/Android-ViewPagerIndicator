@@ -77,7 +77,7 @@ public class TitlePageIndicator extends View implements PageIndicator {
     }
 
     public enum IndicatorStyle {
-        None(0), Triangle(1), Underline(2);
+        None(0), Triangle(1), Underline(2), Background(3);
 
         public final int value;
 
@@ -123,6 +123,7 @@ public class TitlePageIndicator extends View implements PageIndicator {
     private boolean mBoldText;
     private int mColorText;
     private int mColorSelected;
+    private Drawable mTitleBackground;
     private Path mPath = new Path();
     private final Rect mBounds = new Rect();
     private final Paint mPaintFooterLine = new Paint();
@@ -208,6 +209,8 @@ public class TitlePageIndicator extends View implements PageIndicator {
         if (background != null) {
           setBackgroundDrawable(background);
         }
+
+        mTitleBackground = a.getDrawable(R.styleable.TitlePageIndicator_titleBackground);
 
         a.recycle();
 
@@ -479,6 +482,17 @@ public class TitlePageIndicator extends View implements PageIndicator {
                         bound.right = bound.left + w;
                     }
                 }
+
+                if (mTitleBackground != null && currentPage){
+                    mTitleBackground.setBounds(
+                            (int)(bound.left - 2*mTitlePadding),
+                            (int)(bound.top),
+                            (int)(bound.right + 2*mTitlePadding),
+                            (int)(bound.top + getHeight())
+                        );
+                    mTitleBackground.draw(canvas);
+                }
+
                 canvas.drawText(pageTitle, 0, pageTitle.length(), bound.left, bound.bottom + mTopPadding, mPaintText);
 
                 //If we are within the selected bounds draw the selected text
